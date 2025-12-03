@@ -106,11 +106,11 @@ class CartViewSet(generics.RetrieveAPIView):
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
 
-
     def retrieve(self, request, *args, **kwargs):
         cart, created = Cart.objects.get_or_create(user=request.user)
         serializer = self.get_serializer(cart)
         return Response(serializer.data)
+
 
 
 

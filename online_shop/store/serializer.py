@@ -139,13 +139,13 @@ class CartItemSerializer(serializers.ModelSerializer):
     def get_total_price(self, obj):
         return obj.get_total_price()
 
-class CartSerializer(viewsets.ModelViewSet):
-        items = CartItemSerializer(many=True, read_only=True)
-        get_total_price = serializers.SerializerMethodField()
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+    get_total_price = serializers.SerializerMethodField()
 
-        class Meta:
-            model = Cart
-            fields = ['id', 'user', 'items', 'get_total_price']
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'items', 'get_total_price']
 
-        def get_total_price(self, obj):
-            return obj.get_total_price()
+    def get_total_price(self, obj):
+        return obj.get_total_price()
